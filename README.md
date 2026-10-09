@@ -50,3 +50,15 @@ npx playwright install chromium
 จากนั้นรัน `npm run test:update-loop` ได้ตามปกติ การรันแต่ละครั้งจะกดอัปเดต patch ที่พร้อมใช้งานจริงสูงสุด 3 รายการ
 
 ค่า Process เช่น 2 / 3 อาจเป็นลำดับส่วนของ patch จึงบันทึกในรายงานโดยไม่บังคับให้ตัวเลขเท่ากัน การรันปกติยังจำกัดสูงสุด 3 รอบ สามารถตั้ง SPN_MAX_ROUNDS เป็น 1 หรือ 2 เพื่อทดสอบจำนวนรอบน้อยลงได้
+
+## เปลี่ยน URL สำหรับแต่ละระบบ
+ตั้ง SPN_BASE_URL เป็นโฟลเดอร์ของเว็บหรือ URL เต็มของ login.php ก่อนรัน สคริปต์ตรวจหน้าจากข้อความและปุ่ม ไม่บังคับ domain/path เดิม แต่ยังอ่าน PATCHID จากลิงก์เพื่อเลือก patch และบันทึกข้อมูล
+
+Mac:
+SPN_BASE_URL='https://your-host/path/spn/' npm run test:update-loop
+
+PowerShell:
+$env:SPN_BASE_URL = 'https://your-host/path/spn/'
+npm run test:update-loop
+
+หน้าของระบบปลายทางต้องมี iframe และปุ่มตามโครงสร้างเดียวกัน หากบัญชีต่างกัน ตั้ง SPN_USERNAME และ SPN_PASSWORD ก่อนรันด้วย

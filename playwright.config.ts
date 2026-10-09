@@ -1,4 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
+const baseURL = new URL(process.env.SPN_BASE_URL ?? 'https://spnb.nbgwhosting.com/QA/spn/');
+// Accept either the application folder or the full login.php URL.
+if (!baseURL.pathname.endsWith('/') && !baseURL.pathname.endsWith('.php')) {
+  baseURL.pathname += '/';
+}
 export default defineConfig({
   testDir: './tests/function',
   timeout: 60_000,
@@ -9,7 +14,7 @@ export default defineConfig({
   workers: 1,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'https://spnb.nbgwhosting.com/QA/spn/',
+    baseURL: baseURL.href,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
