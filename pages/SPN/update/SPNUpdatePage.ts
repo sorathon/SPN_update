@@ -7,6 +7,7 @@ export class SPNUpdatePage {
   get checkButton() { return this.content.getByRole('button', { name: 'Check', exact: true }); }
   get updateAllButton() { return this.content.getByRole('button', { name: 'Update All', exact: true }); }
   get patchDateHeader() { return this.content.getByText('Patch Date', { exact: true }); }
+  get backButton() { return this.content.getByRole('button', { name: /^BACK$/i }); }
   get patchUpdateLinks() {
     return this.content.getByRole('link', { name: 'Update', exact: true })
       .and(this.content.locator('a[href*="PATCHID="]'));
@@ -54,14 +55,12 @@ export class SPNUpdatePage {
     const deadline = Date.now() + timeout;
     const remaining = () => Math.max(1, deadline - Date.now());
     const body = this.content.locator('body');
-    // Observed QA result: Update Status: Success + Process 1 / 1 Successful Update.
-    await expect(body).toContainText(/Update Status:\s*Success\b/i, { timeout: remaining() });
-    await expect(body).toContainText(/Successful Update/i, { timeout: remaining() });
-    await expect.poll(async () => {
-      const text = await body.innerText();
-      const process = text.match(/Process\s+(\d+)\s*\/\s*(\d+)/i);
-      return !!process && Number(process[2]) > 0 && Number(process[1]) === Number(process[2]);
-    }, { timeout: remaining(), message: 'Wait for all update processes to complete successfully' }).toBe(true);
+    // Process 2 / 3 can identify a successful part of a multi-part patch.
+    // It is report metadata, not the completion count of this request.
+    await expect(body).toContainText(/Update Status:\s*Success\b/i, { timeout: remaining(), useInnerText: true });
+    await expect(body).toContainText(/Successful Update/i, { timeout: remaining(), useInnerText: true });
+    await expect(this.backButton).toBeVisible({ timeout: remaining() });
+    await expect(this.backButton).toBeEnabled({ timeout: remaining() });
   }
   async readPatch(fullUrl: string) {
     const patchId = new URL(fullUrl).searchParams.get('PATCHID')!;
@@ -82,7 +81,9 @@ export class SPNUpdatePage {
     };
   }
   async clickBack() {
-    await this.content.getByRole('button', { name: /^BACK$/i }).click();
+    await expect(this.backButton).toBeVisible();
+    await expect(this.backButton).toBeEnabled();
+    await this.backButton.click();
     await this.expectLoaded();
   }
 }

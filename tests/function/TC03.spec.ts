@@ -5,7 +5,10 @@ import { test, expect } from '../../fixtures';
 test('TC03 - Update up to 3 patches with Back and export patch data', async ({
   loggedInAs, SPNDashboardPage, SPNUpdatePage, page,
 }, testInfo) => {
-  const maxRounds = 3;
+  const maxRounds = Number(process.env.SPN_MAX_ROUNDS ?? 3);
+  if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 3) {
+    throw new Error('SPN_MAX_ROUNDS must be an integer from 1 to 3');
+  }
   test.setTimeout(maxRounds * 360_000 + 60_000);
   const runId = new Date().toISOString().replace(/[:.]/g, '-');
   const outputDir = path.resolve('patch-results', runId);
@@ -77,7 +80,9 @@ test('TC03 - Update up to 3 patches with Back and export patch data', async ({
           await page.screenshot({ path: path.join(outputDir, 'round-' + round + '-failed.png'), fullPage: true }).catch(() => {});
           throw error;
         }
+        console.log('Round ' + round + ': clicking BACK');
         await SPNUpdatePage.clickBack();
+        console.log('Round ' + round + ': BACK completed; patch list is ready');
       });
     }
     if (summary.stopReason === 'running') summary.stopReason = 'round-limit-reached';

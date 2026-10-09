@@ -10,7 +10,8 @@
     "report": "playwright show-report",
     "test:preview": "playwright test --grep-invert \"TC02|TC03\"",
     "test:update": "playwright test --headed --grep TC02",
-    "test:update-loop": "playwright test tests/function/TC03.spec.ts --headed"
+    "test:update-loop": "playwright test tests/function/TC03.spec.ts --headed",
+    "test:back-regression": "playwright test --config tests-regression/playwright.config.ts"
   },
   "keywords": [],
   "author": "",
