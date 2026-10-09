@@ -1,33 +1,50 @@
-# SPN Update POM
+# วิธีรันสคริปต์อัปเดต Patch
 
-URL: https://spnb.nbgwhosting.com/QA/spn/login.php
-Credentials default to nat / nat; override with SPN_USERNAME and SPN_PASSWORD.
-
-- SPN01: login form.
-- SPN02: login and dashboard.
-- TC01: open Smart Update, hover patch Update for 5 seconds, verify its full absolute URL.
-- TC02: hover for 5 seconds, click that patch, wait for Update Status: Success, Successful Update and complete Process counts, up to 5 minutes.
-
-`npm test` runs all cases, including one real patch update in TC02.
-`npm run test:headed` shows the browser and its status-bar URL preview.
-`npm run test:preview` runs login, dashboard and hover checks without applying a patch.
-`npm run test:update` runs only TC02 in a visible browser.
-`npm run report` opens the HTML report with full link URL attachments and screenshots.
-
-By default the first available patch Update link is selected, following the server's patch dependency order.
-Select a specific available patch in PowerShell:
+เปิด PowerShell แล้วรัน:
 
 ```powershell
-$env:SPN_PATCH_ID = '22554'
-npm run test:update
+cd C:\Users\iTservice\Downloads\SPN_update
+npm run test:update-loop
 ```
 
-PATCHID=22554 was applied successfully during verification on 2026-10-09 and may no longer be available.
-UID/UCODE are read dynamically from the current session, not copied from an old screenshot.
-The status bar is browser UI; assertions inspect the hovered anchor's full absolute href.
+คำสั่งนี้รันเฉพาะ `tests/function/TC03.spec.ts` และเปิดเบราว์เซอร์ให้เห็นการทำงาน โดยล็อกอินหน้า QA ด้วยบัญชีที่ตั้งค่าไว้ในสคริปต์ แล้วอัปเดตสูงสุด **3 patch ต่อการรัน** ตามลำดับที่ระบบอนุญาต
 
-## Three-round patch loop
-Run: npm run test:update-loop
-TC03 updates at most 3 available patches, hovering 5 seconds before each click, waiting for success and clicking BACK after every round. It stops early if the patch list is exhausted, and fails without retrying if a patch fails or a pending patch is blocked.
-Reports and screenshots: patch-results/<run timestamp>/patch-updates.json and patch-updates.csv. Data includes patch ID/date/title/level/description, result text, process counts, duration and screenshots. UCODE is redacted. Times are recorded as ISO UTC.
-Default npm test includes TC02 and TC03 (up to 4 real updates). Use test:update-loop for exactly the requested maximum of 3 updates.
+แต่ละรอบจะ:
+
+1. ชี้เมาส์ที่ปุ่ม Update ค้าง 5 วินาที และตรวจ URL เต็ม
+2. เก็บ ID, วันที่, ชื่อ, ระดับ และรายละเอียดของ patch
+3. กด Update แล้วรอ `Update Status: Success` และจำนวน Process ครบ สูงสุด 5 นาที
+4. บันทึกผลและภาพหน้าจอ แล้วกด Back เพื่อทำรอบถัดไป
+
+สคริปต์หยุดเมื่อครบ 3 รอบหรือ patch หมด หากอัปเดตผิดพลาดหรือมี patch ที่ติดเงื่อนไขจนไม่มีปุ่ม Update จะหยุดและรายงานข้อผิดพลาด โดยไม่คลิกซ้ำอัตโนมัติ
+
+## ไฟล์ผลลัพธ์
+
+ผลของแต่ละครั้งอยู่ในโฟลเดอร์:
+
+```text
+C:\Users\iTservice\Downloads\SPN_update\patch-results\<เวลาที่รัน>\
+```
+
+- `patch-updates.json` — ข้อมูล patch และสถานะของแต่ละรอบ
+- `patch-updates.csv` — ข้อมูลสำหรับเปิดใน Excel
+- `round-<รอบ>-patch-<ID>.png` — ภาพหน้าจออัปเดตสำเร็จ
+
+รายงานมี URL ที่ปิดบังค่า session `UCODE` และบันทึกเวลาเป็น ISO UTC
+
+หากต้องการดูรายงาน Playwright หลังรัน:
+
+```powershell
+npm run report
+```
+
+## เตรียมเครื่องครั้งแรกเท่านั้น
+
+ต้องติดตั้ง Node.js และ npm ก่อน หากยังไม่มี dependencies หรือเบราว์เซอร์ Playwright ให้รันในโฟลเดอร์ `SPN_update`:
+
+```powershell
+npm ci
+npx playwright install chromium
+```
+
+จากนั้นรัน `npm run test:update-loop` ได้ตามปกติ การรันแต่ละครั้งจะกดอัปเดต patch ที่พร้อมใช้งานจริงสูงสุด 3 รายการ
