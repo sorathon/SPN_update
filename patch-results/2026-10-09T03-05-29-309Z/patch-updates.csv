@@ -1,0 +1,16 @@
+﻿round,patchId,patchDate,title,level,description,status,startedAt,finishedAt,durationMs,completedProcesses,totalProcesses,updateUrl,resultText,screenshot,error
+"1","22578","2026-09-01 17:13:49","Update Master File REFDRT - Seq Duty Rate วันที่ 1 เดือน 9 ปี 2026","Critical","REFDRT - Seq Duty Rate","success","2026-10-09T03:05:36.580Z","2026-10-09T03:05:37.589Z","1007","1","1","https://spnb.nbgwhosting.com/QA/IE5DEV.shippingnet/data_defaulttemplate.php?UID=417&UCODE=%5Bredacted%5D&SERVICENAME=IMCORESERVICE&ACTION=SMART_UPDATE&PATCHID=22578","Update Status: Success - Server License Key : Patch_bill64MY
+	Update Master File REFDRT - Seq Duty Rate วันที่ 1 เดือน 9 ปี 2026
+	
+
+10:00:49 Process 1 / 1 Successful Update 2 data(s) (Added = 2) from 2.","round-1-patch-22578.png",""
+"2","22584","2026-09-07 10:33:48","Update Master File REFDRT - Seq Duty Rate วันที่ 7 เดือน 9 ปี 2026","Critical","REFDRT - Seq Duty Rate","success","2026-10-09T03:05:43.327Z","2026-10-09T03:05:44.314Z","986","1","1","https://spnb.nbgwhosting.com/QA/IE5DEV.shippingnet/data_defaulttemplate.php?UID=417&UCODE=%5Bredacted%5D&SERVICENAME=IMCORESERVICE&ACTION=SMART_UPDATE&PATCHID=22584","Update Status: Success - Server License Key : Patch_bill64MY
+	Update Master File REFDRT - Seq Duty Rate วันที่ 7 เดือน 9 ปี 2026
+	
+
+10:00:55 Process 1 / 1 Successful Update 2 data(s) (Added = 2) from 2.","round-2-patch-22584.png",""
+"3","22592","2026-09-08 15:31:12","Update Master File RFARS - Port วันที่ 8 เดือน 9 ปี 2026","Critical","RFARS - Port","success","2026-10-09T03:05:49.951Z","2026-10-09T03:05:50.942Z","990","1","1","https://spnb.nbgwhosting.com/QA/IE5DEV.shippingnet/data_defaulttemplate.php?UID=417&UCODE=%5Bredacted%5D&SERVICENAME=IMCORESERVICE&ACTION=SMART_UPDATE&PATCHID=22592","Update Status: Success - Server License Key : Patch_bill64MY
+	Update Master File RFARS - Port วันที่ 8 เดือน 9 ปี 2026
+	
+
+10:01:02 Process 1 / 1 Successful Update 1087 data(s) (Added = 1087) from 1087.","round-3-patch-22592.png",""

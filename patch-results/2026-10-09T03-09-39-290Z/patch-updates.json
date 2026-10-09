@@ -1,0 +1,57 @@
+{
+  "maxRounds": 3,
+  "stopReason": "round-limit-reached",
+  "records": [
+    {
+      "round": 1,
+      "patchId": "22598",
+      "patchDate": "2026-09-08 15:42:41",
+      "title": "Update Master File RFPMG - PERMISSION GOODS NEW วันที่ 8 เดือน 9 ปี 2026",
+      "level": "Critical",
+      "description": "RFPMG - PERMISSION GOODS NEW",
+      "updateUrl": "https://spnb.nbgwhosting.com/QA/IE5DEV.shippingnet/data_defaulttemplate.php?UID=417&UCODE=%5Bredacted%5D&SERVICENAME=IMCORESERVICE&ACTION=SMART_UPDATE&PATCHID=22598",
+      "startedAt": "2026-10-09T03:09:46.447Z",
+      "status": "success",
+      "resultText": "Update Status: Success - Server License Key : Patch_bill64MY\n\tUpdate Master File RFPMG - PERMISSION GOODS NEW วันที่ 8 เดือน 9 ปี 2026\n\t\n\n10:04:59 Process 1 / 1 Successful Update 32 data(s) (Added = 32) from 32.\n10:05:09 Process 1 / 2 Successful Update 10000 data(s) (Added = 10000) from 10000.\n10:05:12 Process 2 / 2 Successful Update 2480 data(s) (Added = 2480) from 2480.",
+      "completedProcesses": 1,
+      "totalProcesses": 1,
+      "finishedAt": "2026-10-09T03:10:01.550Z",
+      "durationMs": 15101,
+      "screenshot": "round-1-patch-22598.png"
+    },
+    {
+      "round": 2,
+      "patchId": "22602",
+      "patchDate": "2026-09-10 16:39:20",
+      "title": "Update Master File RFPMG - PERMISSION GOODS NEW วันที่ 10 เดือน 9 ปี 2026",
+      "level": "Critical",
+      "description": "RFPMG - PERMISSION GOODS NEW",
+      "updateUrl": "https://spnb.nbgwhosting.com/QA/IE5DEV.shippingnet/data_defaulttemplate.php?UID=417&UCODE=%5Bredacted%5D&SERVICENAME=IMCORESERVICE&ACTION=SMART_UPDATE&PATCHID=22602",
+      "startedAt": "2026-10-09T03:10:07.161Z",
+      "status": "success",
+      "resultText": "Update Status: Success - Server License Key : Patch_bill64MY\n\tUpdate Master File RFPMG - PERMISSION GOODS NEW วันที่ 10 เดือน 9 ปี 2026\n\t\n\n10:05:19 Process 1 / 1 Successful Update 32 data(s) (Added = 32) from 32.\n10:05:31 Process 1 / 2 Successful Update 10000 data(s) (Added = 10000) from 10000.\n10:05:35 Process 2 / 2 Successful Update 3769 data(s) (Added = 3769) from 3769.",
+      "completedProcesses": 1,
+      "totalProcesses": 1,
+      "finishedAt": "2026-10-09T03:10:24.271Z",
+      "durationMs": 17109,
+      "screenshot": "round-2-patch-22602.png"
+    },
+    {
+      "round": 3,
+      "patchId": "22606",
+      "patchDate": "2026-09-11 11:02:37",
+      "title": "Update Master File REFDRT - Seq Duty Rate วันที่ 11 เดือน 9 ปี 2026",
+      "level": "Critical",
+      "description": "REFDRT - Seq Duty Rate",
+      "updateUrl": "https://spnb.nbgwhosting.com/QA/IE5DEV.shippingnet/data_defaulttemplate.php?UID=417&UCODE=%5Bredacted%5D&SERVICENAME=IMCORESERVICE&ACTION=SMART_UPDATE&PATCHID=22606",
+      "startedAt": "2026-10-09T03:10:29.833Z",
+      "status": "success",
+      "resultText": "Update Status: Success - Server License Key : Patch_bill64MY\n\tUpdate Master File REFDRT - Seq Duty Rate วันที่ 11 เดือน 9 ปี 2026\n\t\n\n10:05:42 Process 1 / 1 Successful Update 1 data(s) (Added = 1) from 1.",
+      "completedProcesses": 1,
+      "totalProcesses": 1,
+      "finishedAt": "2026-10-09T03:10:30.840Z",
+      "durationMs": 1006,
+      "screenshot": "round-3-patch-22606.png"
+    }
+  ]
+}

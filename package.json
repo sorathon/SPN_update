@@ -1,0 +1,22 @@
+{
+  "name": "spn_update",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "test:preview": "playwright test --grep-invert \"TC02|TC03\"",
+    "test:update": "playwright test --headed --grep TC02",
+    "test:update-loop": "playwright test tests/function/TC03.spec.ts --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^26.6.4"
+  }
+}
