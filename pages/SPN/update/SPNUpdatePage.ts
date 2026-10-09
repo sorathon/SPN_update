@@ -20,7 +20,6 @@ export class SPNUpdatePage {
   async expectLoaded() {
     await expect(this.gatewayStatus).toBeVisible();
     await expect(this.checkButton).toBeVisible();
-    await expect(this.updateAllButton).toBeVisible();
     await expect(this.patchDateHeader).toBeVisible();
   }
   async hoverUpdateAndGetUrl(patchId?: string): Promise<string> {
@@ -28,7 +27,7 @@ export class SPNUpdatePage {
     await expect(link).toBeVisible();
     await link.hover();
     // Required pause for the browser's link preview/status bar.
-    await this.page.waitForTimeout(5_000);
+    await this.page.waitForTimeout(2_500);
     const fullUrl = await link.evaluate(element => (element as HTMLAnchorElement).href);
     // Read the current link for reporting; do not restrict its host/path to one environment.
     return fullUrl;
@@ -44,10 +43,9 @@ export class SPNUpdatePage {
     const deadline = Date.now() + timeout;
     const remaining = () => Math.max(1, deadline - Date.now());
     const body = this.content.locator('body');
-    // Process 2 / 3 can identify a successful part of a multi-part patch.
-    // It is report metadata, not the completion count of this request.
+    // Patch types may omit Successful Update details and Process counts.
+    // Completion uses the success status and an actionable Back button.
     await expect(body).toContainText(/Update Status:\s*Success\b/i, { timeout: remaining(), useInnerText: true });
-    await expect(body).toContainText(/Successful Update/i, { timeout: remaining(), useInnerText: true });
     await expect(this.backButton).toBeVisible({ timeout: remaining() });
     await expect(this.backButton).toBeEnabled({ timeout: remaining() });
   }

@@ -11,7 +11,7 @@ npm run test:update-loop
 
 แต่ละรอบจะ:
 
-1. ชี้เมาส์ที่ปุ่ม Update ค้าง 5 วินาที และตรวจ URL เต็ม
+1. ชี้เมาส์ที่ปุ่ม Update ค้าง 2.5 วินาที และอ่าน URL เต็ม
 2. เก็บ ID, วันที่, ชื่อ, ระดับ และรายละเอียดของ patch
 3. กด Update แล้วรอ `Update Status: Success` และปุ่ม Back พร้อมกด สูงสุด 5 นาที
 4. บันทึกผลและภาพหน้าจอ แล้วกด Back เพื่อทำรอบถัดไป
@@ -62,3 +62,5 @@ $env:SPN_BASE_URL = 'https://your-host/path/spn/'
 npm run test:update-loop
 
 หน้าของระบบปลายทางต้องมี iframe และปุ่มตามโครงสร้างเดียวกัน หากบัญชีต่างกัน ตั้ง SPN_USERNAME และ SPN_PASSWORD ก่อนรันด้วย
+
+ไม่จำเป็นต้องมีข้อความ Successful Update หรือรายละเอียด Process หากแสดง Update Status: Success และปุ่ม Back พร้อมกด สคริปต์จะทำรอบถัดไปได้ ค่า Process ที่ไม่มีจะบันทึกเป็น null ใน JSON และช่องว่างใน CSV

@@ -22,6 +22,30 @@ test('Progress without success does not permit completion', async ({ page }) => 
   await expect(new SPNUpdatePage(page).waitForUpdateCompleted(500)).rejects.toThrow();
 });
 
+test('Success without Successful Update or Process details permits Back', async ({ page }) => {
+  await page.setContent('<iframe id="infrm" name="infrm"></iframe>');
+  const list = '<div>Gateway Status</div><button>Check</button><div>Patch Date</div>';
+  await page.frame({ name: 'infrm' })!.setContent(
+    '<div>Update Status: Success</div><p>Update Patch: [64bits] Fix issue Rgoods Search timeout</p><button>BACK</button>'
+  );
+  const update = new SPNUpdatePage(page);
+  await update.backButton.evaluate((button, html) => {
+    button.addEventListener('click', () => { button.ownerDocument.body.innerHTML = html; });
+  }, list);
+  await update.waitForUpdateCompleted(2000);
+  const result = await update.readUpdateResult();
+  expect(result.completedProcesses).toBeNull();
+  expect(result.totalProcesses).toBeNull();
+  await update.clickBack();
+  await expect(update.patchDateHeader).toBeVisible();
+});
+
+test('Success with a disabled Back button still waits', async ({ page }) => {
+  await page.setContent('<iframe id="infrm" name="infrm"></iframe>');
+  await page.frame({ name: 'infrm' })!.setContent('<div>Update Status: Success</div><button disabled>BACK</button>');
+  await expect(new SPNUpdatePage(page).waitForUpdateCompleted(500)).rejects.toThrow();
+});
+
 for (const root of ['https://first.example/app-one/', 'https://second.example/another/application/']) {
   test('Update and Back work with environment ' + root, async ({ page }) => {
     const list = '<div>Gateway Status</div><button>Check</button><button>Update All</button><div>Patch Date</div>' +
