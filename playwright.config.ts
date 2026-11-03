@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-const baseURL = new URL(process.env.SPN_BASE_URL ?? 'https://spnb.nbgwhosting.com/QA/spn/');
+const baseURL = new URL(process.env.SPN_BASE_URL ?? 'https://10.6.208.107/pam/spn/');
 // Accept either the application folder or the full login.php URL.
 if (!baseURL.pathname.endsWith('/') && !baseURL.pathname.endsWith('.php')) {
   baseURL.pathname += '/';
@@ -15,6 +15,8 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: baseURL.href,
+    // Allow the QA site's certificate errors regardless of browser language.
+    ignoreHTTPSErrors: true,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
